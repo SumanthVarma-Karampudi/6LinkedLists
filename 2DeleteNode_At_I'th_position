@@ -1,0 +1,131 @@
+#include <iostream>
+using namespace std;
+
+
+class Node
+{
+public:
+	int data;
+	Node *next;
+	Node(int data)
+	{
+		this->data = data;
+		this->next = NULL;
+	}
+};
+
+
+Node *takeinput()
+{
+	int data;
+	cin >> data;
+	Node *head = NULL, *tail = NULL;
+	while (data != -1)
+	{
+		Node *newNode = new Node(data);
+		if (head == NULL)
+		{
+			head = newNode;
+			tail = newNode;
+		}
+		else
+		{
+			tail->next = newNode;
+			tail = newNode;
+		}
+		cin >> data;
+	}
+	return head;
+}
+
+void print(Node *head)
+{
+	Node *temp = head;
+	while (temp != NULL)
+	{
+		cout << temp->data << " ";
+		temp = temp->next;
+	}
+	cout << endl;
+}
+
+
+Node *deleteNode(Node *head, int pos)       //Delete Node at ith position
+{	
+    int count=0;
+	Node* temp=head;
+	Node* a=0;
+	Node* b=0;
+
+	if(head==0){
+		return head;
+	}
+	if(pos==0){
+		a=temp;
+		temp=temp->next;
+		delete a;
+		head=temp;
+	return head;
+	}
+	while(count<pos-1 && temp->next!=NULL){
+		temp=temp->next;
+		count++;
+	}
+        if (temp->next != NULL) {
+          a = temp->next;
+          b = a->next; // a=temp->next->next;
+          temp->next = b;
+          delete a;
+        }
+          return head;
+}
+
+
+int main()
+{
+	int t;
+	cin >> t;
+
+	while (t--)
+	{
+		Node *head = takeinput();
+		int pos;
+		cin >> pos;
+		head = deleteNode(head, pos);
+		print(head);
+	}
+
+	return 0;
+}
+
+
+
+Node *deleteNode(Node *head, int pos)
+{	
+    int count=0;
+	Node* temp=head;
+	Node* a=0;
+	Node* b=0;
+
+	if(head==0){
+		return head;
+	}
+	if(pos==0){
+		a=temp;
+		temp=temp->next;
+		delete a;
+		head=temp;
+	return head;
+	}
+	while(count<pos-1 && temp->next!=NULL){
+		temp=temp->next;
+		count++;
+	}
+        if (temp->next != NULL) {
+          a = temp->next;
+          b = a->next; // a=temp->next->next;
+          temp->next = b;
+          delete a;
+        }
+          return head;
+}
